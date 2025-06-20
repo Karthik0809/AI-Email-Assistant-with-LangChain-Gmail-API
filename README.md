@@ -126,4 +126,6 @@ email_reply_agent/
 
 ## License
 
-MIT License 
+This project is licensed under the [MIT License](LICENSE).
+
+You are free to use, modify, and distribute this software with attribution. See the LICENSE file for details. 
