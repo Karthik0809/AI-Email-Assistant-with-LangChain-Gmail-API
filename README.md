@@ -1,6 +1,7 @@
 # Email Reply Helper
 
 A smart, fast, and flexible Streamlit app that generates contextual email replies using AI (LangChain + OpenRouter), then opens them directly in your default email client.
+![image](https://github.com/user-attachments/assets/7cf40969-a7cb-4750-b047-670211cdcaae)
 
 ## Features
 
