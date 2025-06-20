@@ -120,8 +120,7 @@ email_reply_agent/
 ├── .env                  # Your actual environment variables (not in git)
 └── utils/
     ├── ai_generator.py   # AI reply generation
-    ├── reply_generator.py # Main reply orchestrator
-    └── template_generator.py # Template system (fallback)
+    └── reply_generator.py # Main reply orchestrator
 ```
 
 ## License
