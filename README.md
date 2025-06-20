@@ -31,9 +31,13 @@ A smart, fast, and flexible Streamlit app that generates contextual email replie
    pip install -r requirements.txt
    ```
 
-3. Set up OpenRouter API key:
+3. Set up your API key:
    ```bash
-   echo "OPENROUTER_API_KEY=your_openrouter_api_key_here" > .env
+   # Copy the example file
+   cp .env.example .env
+   
+   # Edit .env and add your OpenRouter API key
+   # Get your API key from: https://openrouter.ai/
    ```
 
 ## Usage
@@ -47,18 +51,20 @@ The app will open in your web browser at `http://localhost:8501`
 
 ## Configuration
 
-Create a `.env` file in the project root:
+1. **Copy the example file**:
+   ```bash
+   cp .env.example .env
+   ```
 
-```bash
-# OpenRouter Configuration
-OPENROUTER_API_KEY=your_openrouter_api_key_here
-OPENROUTER_MODEL=openai/gpt-3.5-turbo
-USE_OPENROUTER=true
-
-# App Configuration
-USE_AI=true
-FALLBACK_TO_TEMPLATES=true
-```
+2. **Edit `.env`** and add your OpenRouter API key:
+   ```bash
+   # OpenRouter Configuration
+   OPENROUTER_API_KEY=your_actual_api_key_here
+   OPENROUTER_MODEL=openai/gpt-3.5-turbo
+   USE_OPENROUTER=true
+   USE_AI=true
+   FALLBACK_TO_TEMPLATES=true
+   ```
 
 ## Available AI Models (OpenRouter)
 
@@ -90,6 +96,12 @@ You'd need to generate hundreds of emails to spend even $1!
 3. Get your API key from the dashboard
 4. Add it to your `.env` file
 
+## Security
+
+- **Your API key is private**: The `.env` file is excluded from git and won't be uploaded to GitHub
+- **Template file**: Use `.env.example` as a template - it contains no real API keys
+- **Never commit secrets**: Always use environment variables for sensitive data
+
 ## Requirements
 
 - Python 3.8+
@@ -104,7 +116,8 @@ email_reply_agent/
 ├── main.py                 # Streamlit app entry point
 ├── config.py              # Configuration management
 ├── requirements.txt       # Python dependencies
-├── .env                  # Environment variables (create this)
+├── .env.example          # Template for environment variables
+├── .env                  # Your actual environment variables (not in git)
 └── utils/
     ├── ai_generator.py   # AI reply generation
     ├── reply_generator.py # Main reply orchestrator
