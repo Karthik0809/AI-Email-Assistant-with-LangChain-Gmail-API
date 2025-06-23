@@ -1,4 +1,4 @@
-# Email Reply Helper
+# AI Email Assistant with LangChain & Gmail API
 
 A smart, fast, and flexible Streamlit app that generates contextual email replies using AI (LangChain + OpenRouter), then opens them directly in your default email client.
 
