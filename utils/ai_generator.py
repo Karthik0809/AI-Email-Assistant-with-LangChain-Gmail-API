@@ -3,12 +3,9 @@ AI-powered email reply generation using LangChain with OpenRouter support.
 """
 
 import os
-import sys
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-
 from langchain_openai import ChatOpenAI
-from langchain.prompts import ChatPromptTemplate
-from langchain.schema import HumanMessage, SystemMessage
+from langchain_core.prompts import ChatPromptTemplate
+from langchain_core.messages import HumanMessage, SystemMessage
 from config import Config
 
 class AIGenerator:
@@ -16,13 +13,14 @@ class AIGenerator:
         self.llm = None
         self.setup_llm()
     
-    def setup_llm(self):
+    def setup_llm(self, model_name=None):
         """Setup the LangChain LLM with OpenRouter or OpenAI"""
         try:
+            model = model_name or Config.OPENROUTER_MODEL
             if Config.USE_OPENROUTER and Config.OPENROUTER_API_KEY:
                 # Use OpenRouter
                 self.llm = ChatOpenAI(
-                    model=Config.OPENROUTER_MODEL,
+                    model=model,
                     temperature=0.7,
                     api_key=Config.OPENROUTER_API_KEY,
                     base_url=Config.OPENROUTER_BASE_URL,
@@ -31,15 +29,16 @@ class AIGenerator:
                         "X-Title": "Email Reply Helper"
                     }
                 )
-                print(f"✅ Using OpenRouter with model: {Config.OPENROUTER_MODEL}")
+                print(f"✅ Using OpenRouter with model: {model}")
             elif Config.OPENAI_API_KEY:
                 # Use direct OpenAI
+                model = model_name or Config.OPENAI_MODEL
                 self.llm = ChatOpenAI(
-                    model=Config.OPENAI_MODEL,
+                    model=model,
                     temperature=0.7,
                     api_key=Config.OPENAI_API_KEY
                 )
-                print(f"✅ Using OpenAI with model: {Config.OPENAI_MODEL}")
+                print(f"✅ Using OpenAI with model: {model}")
             else:
                 print("❌ No API key found for OpenRouter or OpenAI")
                 self.llm = None
@@ -47,18 +46,24 @@ class AIGenerator:
             print(f"Error setting up AI model: {e}")
             self.llm = None
     
-    def generate_ai_reply(self, email_text: str) -> str:
+    def generate_ai_reply(self, email_text: str, model_name: str = None, tone: str = "Professional") -> str:
         """Generate an AI-powered reply using LangChain"""
+        # Always re-setup if model_name is provided to ensure correct model is used
+        if model_name:
+            self.setup_llm(model_name)
+
         if not self.llm:
             return None
         
         try:
             # Create a system prompt for email reply generation
-            system_prompt = """You are a professional email assistant. Your task is to generate polite, concise, and contextually appropriate email replies.
+            system_prompt = f"""You are a professional email assistant. Your task is to generate polite, concise, and contextually appropriate email replies.
+The desired tone for the reply is: {tone}.
 
 Guidelines:
 - Keep replies professional and courteous
-- Match the tone and formality of the original email
+- Match the requested tone: {tone}
+- Match the formality of the original email where appropriate
 - Be specific to the content and intent of the email
 - Keep responses concise but complete
 - End with "Best regards," (no name)

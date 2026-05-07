@@ -38,19 +38,24 @@ else:
     st.sidebar.warning("AI is not available. Please check your configuration.")
 
 # Model selection for OpenRouter
-if Config.USE_OPENROUTER and Config.OPENROUTER_API_KEY:
+selected_model = Config.OPENROUTER_MODEL
+if Config.USE_OPENROUTER:
     st.sidebar.subheader("🤖 AI Model Selection")
     available_models = Config.get_available_models()
     selected_model = st.sidebar.selectbox(
         "Choose Model:",
         available_models,
-        index=available_models.index(Config.OPENROUTER_MODEL) if Config.OPENROUTER_MODEL in available_models else 0
+        index=available_models.index(Config.OPENROUTER_MODEL) if Config.OPENROUTER_MODEL in available_models else 0,
+        help="Select the AI model to use for generating replies."
     )
-    
-    # Update model if changed
-    if selected_model != Config.OPENROUTER_MODEL:
-        st.sidebar.info(f"Model changed to: {selected_model}")
-        # Note: In a real app, you'd want to update the config dynamically
+
+# Tone selection
+st.sidebar.subheader("🎭 Tone Selection")
+selected_tone = st.sidebar.selectbox(
+    "Choose Tone:",
+    ["Professional", "Friendly", "Concise", "Detailed", "Enthusiastic", "Apologetic"],
+    index=0
+)
 
 # --- UI Components ---
 
@@ -74,7 +79,11 @@ with col2:
 if st.button("🤖 Generate AI Reply", type="primary"):
     if email_content.strip():
         with st.spinner("Generating AI reply..."):
-            reply, mode = reply_generator.generate_reply(email_content, force_template=False)
+            reply, mode = reply_generator.generate_reply(
+                email_content,
+                model_name=selected_model,
+                tone=selected_tone
+            )
             st.session_state.generated_reply = reply
             st.session_state.generation_mode = mode
     else:
