@@ -5,6 +5,7 @@
 
 # Credentials and sensitive files
 credentials.json
+token.json
 *.json.key
 *.pem
 *.key

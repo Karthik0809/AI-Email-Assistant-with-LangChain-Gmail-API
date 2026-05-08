@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: email-reply-helper
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: streamlit run main.py --server.port $PORT
+    envVars:
+      - key: OPENROUTER_API_KEY
+        sync: false
+      - key: OPENROUTER_MODEL
+        value: openai/gpt-3.5-turbo
+      - key: USE_OPENROUTER
+        value: "true"
+      - key: USE_AI
+        value: "true"

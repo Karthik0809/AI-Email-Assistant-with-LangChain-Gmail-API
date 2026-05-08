@@ -25,11 +25,12 @@ class Config:
     def validate_config(cls):
         """Validate the configuration"""
         if cls.USE_AI:
-            if cls.USE_OPENROUTER and not cls.OPENROUTER_API_KEY:
-                print("Warning: OpenRouter API key not found. Will use template-based replies.")
-                return False
-            elif not cls.USE_OPENROUTER and not cls.OPENAI_API_KEY:
-                print("Warning: OpenAI API key not found. Will use template-based replies.")
+            if cls.USE_OPENROUTER:
+                if not cls.OPENROUTER_API_KEY:
+                    print("Error: OpenRouter API key not found in environment variables.")
+                    return False
+            elif not cls.OPENAI_API_KEY:
+                print("Error: OpenAI API key not found in environment variables.")
                 return False
         return True
     

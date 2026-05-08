@@ -7,11 +7,13 @@ A smart, fast, and flexible Streamlit app that generates contextual email replie
 ## Features
 
 - **🤖 AI-Powered Replies**: Uses LangChain with OpenRouter (multiple models)
-- **🎯 Context-Aware**: Analyzes email content to generate relevant replies
-- **🚀 One-Click Send**: Generates a "Send via Gmail" link that opens a pre-filled compose window
-- **✏️ Editable Replies**: Edit generated replies directly in the app before sending
-- **🎛️ Model Selection**: Choose from multiple AI models via OpenRouter
-- **💰 Cost-Effective**: Very low cost per email (typically less than $0.001 per reply)
+- **📧 Gmail API Integration**: Connect your Gmail account to fetch recent emails and send replies directly from the app.
+- **🎯 Context-Aware**: Analyzes email content to generate relevant replies.
+- **🎭 Tone Selection**: Choose between Professional, Friendly, Concise, and more.
+- **🚀 One-Click Send**: Send via Gmail API or open in your default desktop email client.
+- **✏️ Editable Replies**: Edit generated replies directly in the app before sending.
+- **🎛️ Model Selection**: Choose from multiple AI models via OpenRouter.
+- **💰 Cost-Effective**: Very low cost per email (typically less than $0.001 per reply).
 
 ## How it Works
 
@@ -97,6 +99,19 @@ You'd need to generate hundreds of emails to spend even $1!
 2. Sign up for an account
 3. Get your API key from the dashboard
 4. Add it to your `.env` file
+
+## Setting up Gmail API (Optional but Recommended)
+
+To fetch emails directly and send them via the app:
+
+1. Go to the [Google Cloud Console](https://console.cloud.google.com/)
+2. Create a new project.
+3. Enable the **Gmail API**.
+4. Configure the **OAuth Consent Screen** (Internal or External/Testing).
+5. Go to **Credentials** -> **Create Credentials** -> **OAuth client ID**.
+6. Select **Desktop app** as the application type.
+7. Download the JSON file and rename it to `credentials.json` in the project root.
+8. When you first click "Connect to Gmail" in the app, it will open a browser window for authentication.
 
 ## Security
 
