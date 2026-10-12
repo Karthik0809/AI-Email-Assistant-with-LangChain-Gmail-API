@@ -47,7 +47,6 @@ class Config:
         return [
             "openai/gpt-5.6-terra",
             "openai/gpt-5.6-sol",
-            "openai/gpt-5.6-sol",
             "anthropic/claude-haiku-4.5",
             "anthropic/claude-sonnet-5.5",
             "anthropic/claude-opus-4.8",
