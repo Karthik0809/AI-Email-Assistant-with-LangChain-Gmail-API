@@ -10,11 +10,11 @@ class Config:
     # OpenRouter Configuration
     OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
     OPENROUTER_BASE_URL = os.getenv("OPENROUTER_BASE_URL", "https://openrouter.ai/api/v1")
-    OPENROUTER_MODEL = os.getenv("OPENROUTER_MODEL", "openai/gpt-3.5-turbo")
+    OPENROUTER_MODEL = os.getenv("OPENROUTER_MODEL", "openai/gpt-5.6-terra")
     
     # Alternative: Direct OpenAI (if you prefer)
     OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
-    OPENAI_MODEL = os.getenv("OPENAI_MODEL", "gpt-3.5-turbo")
+    OPENAI_MODEL = os.getenv("OPENAI_MODEL", "gpt-5.6-terra")
     
     # Agent Configuration
     USE_AI = os.getenv("USE_AI", "true").lower() == "true"
@@ -45,12 +45,12 @@ class Config:
     def get_available_models(cls):
         """Get list of available models for OpenRouter"""
         return [
-            "openai/gpt-3.5-turbo",
-            "openai/gpt-4",
-            "openai/gpt-4-turbo",
-            "anthropic/claude-3-haiku",
-            "anthropic/claude-3-sonnet",
-            "anthropic/claude-3-opus",
+            "openai/gpt-5.6-terra",
+            "openai/gpt-5.6-sol",
+            "openai/gpt-5.6-sol",
+            "anthropic/claude-haiku-4.5",
+            "anthropic/claude-sonnet-5.5",
+            "anthropic/claude-opus-4.8",
             "google/gemini-pro",
             "meta-llama/llama-2-13b-chat",
             "meta-llama/llama-2-70b-chat",
